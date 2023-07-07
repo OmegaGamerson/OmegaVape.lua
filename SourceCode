@@ -1,0 +1,45 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealLxops/Vynixius-ui-lib-/main/source.lua"))()
+
+local Window = Library:AddWindow({
+	title = {"OmegaPiston", "Prison Life"},
+	theme = {
+		Accent = Color3.fromRGB(12, 98, 240)
+	},
+	key = Enum.KeyCode.RightControl,
+	default = true
+})
+-- Main Tab
+local Tab = Window:AddTab("Main", {default = false})
+
+local Section = Tab:AddSection("Main Tab", {default = false})
+
+
+-- Player Tab
+local Tab = Window:AddTab("Character", {default = false})
+
+local Section = Tab:AddSection("Local Player", {default = false})
+
+-- Create Slider
+local Slider = Section:AddSlider("WalkSpeed", 16, 100, 50, {toggleable = true, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
+	print("Slider value:", val, " - Slider toggled:", bool)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = val
+end)
+
+local Slider = Section:AddSlider("JumpPower", 1, 100, 50, {toggleable = true, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
+	print("Slider value:", val, " - Slider toggled:", bool)
+end)
+
+local Slider = Section:AddSlider("Field Of View (FOV)", 1, 100, 50, {toggleable = true, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
+	print("Slider value:", val, " - Slider toggled:", bool)
+end)
+
+local Toggle = Section:AddToggle("Inf Jump", {flag = "Toggle_Flag", default = false}, function(bool)
+	print("Toggle set to:", bool)
+end)
+
+local Toggle = Section:AddToggle("Noclip", {flag = "Toggle_Flag", default = false}, function(bool)
+	print("Toggle set to:", bool)
+end)
+local Toggle = Section:AddToggle("Fly", {flag = "Toggle_Flag", default = false}, function(bool)
+	print("Toggle set to:", bool)
+end)
