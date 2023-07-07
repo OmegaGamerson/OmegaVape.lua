@@ -1,7 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealLxops/Vynixius-ui-lib-/main/source.lua"))()
 
 local Window = Library:AddWindow({
-	title = {"OmegaPiston", "Prison Life"},
+	title = {"OmegaPiston", "Universal"},
 	theme = {
 		Accent = Color3.fromRGB(12, 98, 240)
 	},
@@ -20,13 +20,14 @@ local Tab = Window:AddTab("Character", {default = false})
 local Section = Tab:AddSection("Local Player", {default = false})
 
 -- Create Slider
-local Slider = Section:AddSlider("WalkSpeed", 16, 100, 50, {toggleable = true, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
+local Slider = Section:AddSlider("WalkSpeed", 16, 100, 16, {toggleable = false, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
 	print("Slider value:", val, " - Slider toggled:", bool)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = val
 end)
 
-local Slider = Section:AddSlider("JumpPower", 1, 100, 50, {toggleable = true, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
+local Slider = Section:AddSlider("JumpPower", 1, 250, 50, {toggleable = false, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
 	print("Slider value:", val, " - Slider toggled:", bool)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = val
 end)
 
 local Slider = Section:AddSlider("Field Of View (FOV)", 1, 100, 50, {toggleable = true, default = false, flag = "Slider_Flag", fireontoggle = true, fireondrag = true, rounded = true}, function(val, bool)
@@ -35,11 +36,36 @@ end)
 
 local Toggle = Section:AddToggle("Inf Jump", {flag = "Toggle_Flag", default = false}, function(bool)
 	print("Toggle set to:", bool)
+    local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
 end)
 
-local Toggle = Section:AddToggle("Noclip", {flag = "Toggle_Flag", default = false}, function(bool)
+local Toggle = Section:AddToggle("E to Noclip", {flag = "Toggle_Flag", default = false}, function(bool)
 	print("Toggle set to:", bool)
+end)
+
+local p = game.Players.LocalPlayer
+local mo = p:GetMouse()
+
+mo.KeyDown:Connect(function(k)
+	if k == 'e' then
+		noclip = not noclip
+		p.Character.Humanoid:ChangeState(11)
+	end
 end)
 local Toggle = Section:AddToggle("Fly", {flag = "Toggle_Flag", default = false}, function(bool)
 	print("Toggle set to:", bool)
 end)
+
+local Toggle = Section:AddToggle("Instant Respawn", {flag = "Toggle_Flag", default = false}, function(bool)
+	print("Toggle set to:", bool)
+end)
+
+local Toggle = Section:AddToggle("DemiGod", {flag = "Toggle_Flag", default = false}, function(bool)
+	print("Toggle set to:", bool)
+end)
+
